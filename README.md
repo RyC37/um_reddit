@@ -14,7 +14,7 @@ I'm writing most of those code in pyspark because it fits my particular needs an
 - There are many helpful resources findable on google, but I find myself referring to this guide so much that it is worth sharing here:
 	- https://www.analyticsvidhya.com/blog/2016/10/spark-dataframe-and-operations
 
-## Getting setup
+## Getting set up
 Working in the raw command line is a bare, so I set up jupyter notebooks. 
 1. Use this command to connect to flux hadoop 
 	- `ssh -L 8889:localhost:8889 flux-hadoop-login.arc-ts.umich.edu`

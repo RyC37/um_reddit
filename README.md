@@ -4,6 +4,16 @@ Example code for working with reddit data on the University of Michigan's Hadoop
 ## Audience
 This code was drawn up to get myself going with the Reddit data on UM's resources. Since there isn't much documentation for beginners and this data is popular, I am sharing my code. It assumes you are at least a little familiar with python, pandas, and the linux or mac command line. 
 
+I'm writing most of those code in pyspark because it fits my particular needs and offers a dataframe setup that is similar to pandas and my other workflows. There are other tools one could use, however.
+
+## Existing documentation
+- UM's ARC-TS has some helpful but brief user guides online: 
+	- http://arc-ts.umich.edu/systems-and-services/hadoop
+	- http://arc-ts.umich.edu/new-hadoop-user-guide
+	- http://arc-ts.umich.edu/hadoop-user-guide
+- There are many helpful resources findable on google, but I find myself referring to this guide so much that it is worth sharing here:
+	- https://www.analyticsvidhya.com/blog/2016/10/spark-dataframe-and-operations
+
 ## Getting setup
 Working in the raw command line is a bare, so I set up jupyter notebooks. 
 1. Use this command to connect to flux hadoop 

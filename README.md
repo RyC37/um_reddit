@@ -31,11 +31,11 @@ Working in the raw command line is a pain, so I set up jupyter notebooks.
 ## Getting data out
 - The directories spark sees are all in HDFS: it has a whole separate file tree. Whatever you see there you won't see in your normal directories, even if they have the same name/path. 
 - To get files out of HDFS into normal directories (e.g. to download the results saved by spark), use the `hdfs dfs --get [filename]` command. 
-- Unfortunately, when spark saves a file to HDFS, it actually saves a directory filled with chunks ofthe file instead of a single file with everything put together. So `file.tsv` in HDFS is actually a directory full fo little tsv files, not a single fie with all your data. There are several options for dealing with this:
+- Unfortunately, when spark saves a file to HDFS, it actually saves a directory filled with chunks of the file instead of a single file with everything put together. So `file.tsv` in HDFS is actually a directory full fo little tsv files, not a single fie with all your data. That's ideal for spark and hadoop, but a problem for more traditional tools. There are several options for dealing with this:
 	- You can merge it into one file before saving it in spark, but that requires the file to be smaller than the Java memory on various parts of your spark cluster.
 	- You can use the `hdfs dfs -getmerge [file.tsv]` command to merge all the parts into a single file when you pull them out of HDFS into your regular directories. This simply concatenates the files, so if they have a header there will be multiple header rows in the middle of the output file. By default, `spark.write.csv` does not include headers. 
-	- You can write a small custom script to read and combine the parts in a smart way, like my example `combine_tsv.ipynb`. 
-- The reddit data have basically no text validation, and so they contain many characters that can trip up analysis software, from newlines and carriage returns to dangling quotation marks. 
+	- You can write a small custom script to read and combine the parts in a smart way, like my example `combine_tsv.ipynb`. This allows saving files with headers. 
+- The reddit data have basically no text validation. They contain many characters that can trip up analysis software, from newlines and carriage returns to dangling quotation marks. 
 	- The `select_subreddits.ipynb` example removes the characters that are problematic for tsv files (`\r\n\t`) and adjusts the quoting parameters in the write.csv function of pyspark so that the resulting files can be read without error by `pandas.read_csv()`. 
 		- N.B. If you encounter "unexpected EOF" errors, they're likely the result of quotes that have been escaped improperly. Those should be fixed already by this code.
 

@@ -28,6 +28,13 @@ Working in the raw command line is a pain, so I set up jupyter notebooks.
 3. Use a command like the one in `jup.sh` to launch pyspark. This lets you set higher JVM memory limits and specify how many executors should be used to run your jobs. Change the values as necessary.
 4. When the notebook is running, it will give a link in the terminal. Copy that link and paste it into the browser on your desktop. ta-da, Jupyter notebooks!
 
+## First time reading the reddit data
+- Your first time reading the reddit data will require processing the json files. That's a very slow process, so I suggest you do it once and save the result as a .parquet file. 
+	- Note: .orc files tend to cause Java OOM errors with this data, but .parquet files do not.
+- Subsequent reading and processing of the .parquet file is very fast (1-2 minutes instead of half an hour or more). 
+- Example code for this is in `comments_json_to_parquet.ipynb`.
+
+
 ## Getting data out
 - The directories spark sees are all in HDFS: it has a whole separate file tree. Whatever you see there you won't see in your normal directories, even if they have the same name/path. 
 - To get files out of HDFS into normal directories (e.g. to download the results saved by spark), use the `hdfs dfs --get [filename]` command. 

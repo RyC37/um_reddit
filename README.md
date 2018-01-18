@@ -45,6 +45,7 @@ Working in the raw command line is a pain, so I set up jupyter notebooks.
 - The reddit data have basically no text validation. They contain many characters that can trip up analysis software, from newlines and carriage returns to dangling quotation marks. 
 	- The `select_subreddits.ipynb` example removes the characters that are problematic for tsv files (`\r\n\t`) and adjusts the quoting parameters in the write.csv function of pyspark so that the resulting files can be read without error by `pandas.read_csv()`. 
 		- N.B. If you encounter "unexpected EOF" errors, they're likely the result of quotes that have been escaped improperly. Those should be fixed already by this code.
+- `scp` and `rsync` both work for moving data onto and off of the cluster. Because these data are often large, `rsync -vz --progress [source] [target]` is nice (it compresses the data for faster transfers than scp and shows a progress bar with the transfer speed). 
 
 
 
